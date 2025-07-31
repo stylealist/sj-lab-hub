@@ -10,7 +10,7 @@ const features = [
     isAvailable: true,
   },
   {
-    title: "3D 기능",
+    title: "3D 가시화",
     gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
     icon: "🎨",
     description: "3D Visualization",
