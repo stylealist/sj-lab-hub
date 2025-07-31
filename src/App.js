@@ -7,6 +7,7 @@ const features = [
     icon: "🗺️",
     description: "Interactive Maps",
     path: "/map",
+    isAvailable: true,
   },
   {
     title: "3D 기능",
@@ -14,6 +15,8 @@ const features = [
     icon: "🎨",
     description: "3D Visualization",
     path: "/3d",
+    isAvailable: false,
+    status: "Coming Soon",
   },
   {
     title: "Lab",
@@ -21,20 +24,30 @@ const features = [
     icon: "🧪",
     description: "Research & Development",
     path: "/lab",
+    isAvailable: false,
+    status: "Coming Soon",
   },
   {
-    title: "Portfolio",
+    title: "OpenAPI",
     gradient: "linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)",
-    icon: "💼",
-    description: "Project Showcase",
-    path: "/portfolio",
+    icon: "🔌",
+    description: "API Integration",
+    path: "/openapi",
+    isAvailable: false,
+    status: "Coming Soon",
   },
 ];
 
 function App() {
   const handleCardClick = (feature) => {
-    console.log(`${feature.title} 페이지로 이동: ${feature.path}`);
-    window.location.href = feature.path;
+    if (feature.isAvailable) {
+      console.log(`${feature.title} 페이지로 이동: ${feature.path}`);
+      window.location.href = feature.path;
+    } else {
+      alert(
+        `${feature.title}은(는) ${feature.status}입니다.\n\n곧 만나보실 수 있습니다!`
+      );
+    }
   };
 
   return (
@@ -50,7 +63,10 @@ function App() {
           {features.map((feature, idx) => (
             <div
               key={feature.title}
-              style={cardStyle}
+              style={{
+                ...cardStyle,
+                ...(feature.isAvailable ? {} : disabledCardStyle),
+              }}
               onClick={() => handleCardClick(feature)}
             >
               <div
@@ -60,6 +76,13 @@ function App() {
               </div>
               <h3 style={labelStyle}>{feature.title}</h3>
               <p style={descriptionStyle}>{feature.description}</p>
+              {!feature.isAvailable && (
+                <div style={overlayStyle}>
+                  <div style={overlayContentStyle}>
+                    <span style={overlayTextStyle}>{feature.status}</span>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -150,6 +173,12 @@ const cardStyle = {
   overflow: "hidden",
 };
 
+const disabledCardStyle = {
+  filter: "blur(0.3px)",
+  opacity: 0.9,
+  cursor: "not-allowed",
+};
+
 const iconContainerStyle = {
   width: "70px",
   height: "70px",
@@ -189,6 +218,37 @@ const descriptionStyle = {
   fontFamily: "'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
   margin: 0,
   lineHeight: 1.4,
+};
+
+const overlayStyle = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  background: "rgba(0, 0, 0, 0.25)",
+  borderRadius: "1.5rem",
+  backdropFilter: "blur(0.5px)",
+};
+
+const overlayContentStyle = {
+  background: "rgba(255, 255, 255, 0.95)",
+  padding: "1rem 2rem",
+  borderRadius: "2rem",
+  boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+  border: "2px solid rgba(255, 255, 255, 0.8)",
+};
+
+const overlayTextStyle = {
+  fontSize: "1rem",
+  fontWeight: 600,
+  color: "#1e293b",
+  letterSpacing: "0.1em",
+  fontFamily: "'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+  textTransform: "uppercase",
 };
 
 export default App;
