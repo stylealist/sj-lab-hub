@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/post-edit-build.sh\"",
+            "timeout": 60,
+            "statusMessage": "webpack 빌드 확인 중..."
+          }
+        ]
+      }
+    ]
+  }
+}
