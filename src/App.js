@@ -2,10 +2,10 @@ import React from "react";
 
 const features = [
   {
-    title: "2D 지도",
+    title: "시설물 관리",
     gradient: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
-    icon: "🗺️",
-    description: "Interactive Maps",
+    icon: "🏢",
+    description: "Facility Management",
     path: "/map",
     isAvailable: true,
   },
