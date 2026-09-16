@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 프로젝트 개요
 
-SJ-LAB Hub는 React + Webpack 기반의 단일 페이지 랜딩 허브입니다. 2D 지도, 3D 가시화, Lab, OpenAPI 등 여러 하위 기능으로 진입하는 카드형 UI 하나만 제공하는 아주 작은 프로젝트입니다. 별도 라우터 없이 `window.location.href`로 각 기능 경로(`/map`, `/3d`, `/lab`, `/openapi`)로 이동하며, 아직 개발되지 않은 기능은 클릭 시 alert만 표시합니다.
+SJ-LAB Hub는 React + Webpack 기반의 단일 페이지 랜딩 허브입니다. 시설물 관리(지도), 3D 가시화, Lab, OpenAPI 등 여러 하위 기능으로 진입하는 카드형 UI 하나만 제공하는 아주 작은 프로젝트입니다. 별도 라우터 없이 `window.location.href`로 각 기능 경로(`/map`, `/3d`, `/lab`, `/openapi`)로 이동하며, 아직 개발되지 않은 기능은 클릭 시 alert만 표시합니다.
 
 ## 명령어
 
@@ -33,3 +33,7 @@ SJ-LAB Hub는 React + Webpack 기반의 단일 페이지 랜딩 허브입니다.
 
 - 라우팅 라이브러리가 없으므로 `/map`, `/3d`, `/lab`, `/openapi` 경로 이동 시 실제 페이지가 존재하는지는 이 저장소 범위 밖(별도 배포/서버) 문제일 수 있습니다.
 - 테스트 프레임워크가 구성되어 있지 않으므로, 변경 후에는 반드시 `npm start`로 브라우저에서 동작을 직접 확인해야 합니다.
+
+## 통합 허브
+
+저장소를 넘나드는 작업(DB → 백엔드 → 디스커버리 → 게이트웨이 → 프론트엔드 → 배포)의 총괄 기준 저장소는 `C:\developer\workspace\mapservice-rest`입니다. 시스템 전체 구조·API 계약·배포 경로는 그 저장소의 `docs/system-architecture.md`, 로컬 포트·기동 순서·CORS는 `docs/dev-environment.md`에 있고, MCP(GitHub/DB)와 로컬 비밀값도 그 저장소에서만 관리합니다.
