@@ -25,6 +25,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
+      // Copies the tab icon into build/ and injects <link rel="icon">
+      favicon: "./public/favicon.svg",
     }),
   ],
   devServer: {
