@@ -75,7 +75,15 @@ function App() {
   return (
     <div style={outerStyle}>
       <div style={userBoxStyle}>
-        {username && <span style={userNameStyle}>{username}</span>}
+        {username && (
+          <span style={userNameStyle}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={userIconStyle}>
+              <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.8" />
+              <path d="M4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            </svg>
+            <strong style={userIdStyle}>{username}</strong>님
+          </span>
+        )}
         <button style={logoutButtonStyle} onClick={handleLogout} type="button">
           로그아웃
         </button>
@@ -281,16 +289,29 @@ const userBoxStyle = {
   zIndex: 10,
 };
 
+// "👤 아이디님" 형태의 로그인 사용자 표시
 const userNameStyle = {
-  color: "rgba(255,255,255,0.85)",
+  display: "flex",
+  alignItems: "center",
+  gap: "0.35rem",
+  color: "rgba(255,255,255,0.7)",
   fontSize: "0.85rem",
-  fontWeight: 500,
-  letterSpacing: "0.03em",
+  fontWeight: 400,
   fontFamily: "'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-  maxWidth: "200px",
+  whiteSpace: "nowrap",
+};
+
+const userIconStyle = {
+  flexShrink: 0,
+  color: "rgba(255,255,255,0.75)",
+};
+
+const userIdStyle = {
+  fontWeight: 600,
+  color: "#ffffff",
+  maxWidth: "180px",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
 };
 
 const logoutButtonStyle = {
