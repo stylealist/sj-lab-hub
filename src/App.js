@@ -70,11 +70,16 @@ function App() {
     }
   };
 
+  const username = window.SjLabAuth ? window.SjLabAuth.getUsername() : "";
+
   return (
     <div style={outerStyle}>
-      <button style={logoutButtonStyle} onClick={handleLogout} type="button">
-        로그아웃
-      </button>
+      <div style={userBoxStyle}>
+        {username && <span style={userNameStyle}>{username}</span>}
+        <button style={logoutButtonStyle} onClick={handleLogout} type="button">
+          로그아웃
+        </button>
+      </div>
       <div style={containerStyle}>
         <div style={headerStyle}>
           <h1 style={titleStyle}>
@@ -266,10 +271,29 @@ const overlayContentStyle = {
   border: "2px solid rgba(255, 255, 255, 0.8)",
 };
 
-const logoutButtonStyle = {
+const userBoxStyle = {
   position: "absolute",
   top: "1.5rem",
   right: "1.5rem",
+  display: "flex",
+  alignItems: "center",
+  gap: "0.75rem",
+  zIndex: 10,
+};
+
+const userNameStyle = {
+  color: "rgba(255,255,255,0.85)",
+  fontSize: "0.85rem",
+  fontWeight: 500,
+  letterSpacing: "0.03em",
+  fontFamily: "'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+  maxWidth: "200px",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+};
+
+const logoutButtonStyle = {
   padding: "0.5rem 1rem",
   borderRadius: "999px",
   border: "1px solid rgba(255,255,255,0.2)",
