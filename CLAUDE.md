@@ -19,7 +19,7 @@ SJ-LAB Hub는 React + Webpack 기반의 단일 페이지 랜딩 허브입니다.
 - [src/App.js](src/App.js) 우측 상단에 로그아웃 버튼(`logoutButtonStyle`)이 있고 `window.SjLabAuth.logout()`을 호출한다.
 - 엔트리 포인트: [src/index.js](src/index.js) → `createRoot`로 [src/App.js](src/App.js)의 `App` 컴포넌트를 `#root`에 렌더링
 - [src/App.js](src/App.js) 최상단의 `features` 배열이 전체 UI를 구동하는 단일 데이터 소스입니다. 각 항목은 `title`, `gradient`, `icon`, `description`, `path`, `isAvailable`, `status`(비활성 시 배지 문구)로 구성되며, 새 기능 카드를 추가/수정하려면 이 배열만 편집하면 됩니다.
-- 카드 클릭 핸들러 `handleCardClick`은 `isAvailable`이 true면 `path`로 이동하고, false면 `status`를 포함한 alert를 표시합니다. react-router 등 별도 라우팅 라이브러리는 사용하지 않습니다.
+- 카드 클릭 핸들러 `handleCardClick`은 `isAvailable`이 true면 `path`로 이동하고, false면 `status`를 포함한 alert를 표시합니다. react-router 등 별도 라우팅 라이브러리는 사용하지 않습니다. `resolveFeaturePath()`(2026-09-22 추가)가 `path === "/map"`이고 로컬(`localhost`/`127.0.0.1`)이면 `http://localhost:4000`으로 바꿔치기합니다 — 로컬에서는 `sj-lab-mapservice`가 이 허브와 다른 포트에서 별도로 뜨기 때문에 상대경로로는 못 가고, 운영은 nginx가 `sj-lab.co.kr/map/`을 같은 오리진의 하위 경로로 서빙하므로 상대경로를 그대로 둡니다(`sj-lab-mapservice`의 `getApiUrl()`과 같은 hostname 분기 패턴).
 - 스타일은 전부 인라인 style 객체(`camelCase` JS 객체, `xxxStyle` 네이밍)로 [src/App.js](src/App.js) 하단에 정의되어 있으며, 별도 CSS 파일이나 CSS-in-JS 라이브러리는 쓰지 않습니다.
 - [public/index.html](public/index.html)에 Google Fonts(Poppins, Inter) 프리로드와 초기 로딩 화면(`.loading`)이 정의되어 있고, 실제 앱은 이 정적 HTML의 `#root`에 마운트됩니다.
 - 탭 아이콘은 [public/favicon.svg](public/favicon.svg)입니다. 허브 배경색(슬레이트) 위에 `features` 네 카드의 그라데이션 시작색(파랑·초록·주황·보라)을 2×2 타일로 배치한 모양이라, **카드를 추가·삭제하거나 카드 색을 바꾸면 이 파일도 함께 고칠 것**. 지도 서비스(`sj-lab-mapservice`)의 집 모양 아이콘과는 일부러 다르게 만들었습니다. `public/index.html`에 `<link rel="icon">`을 직접 넣지 말 것 — `HtmlWebpackPlugin`의 `favicon` 옵션이 `build/`로 파일을 복사하고 링크를 주입하므로, 템플릿에 따로 넣으면 링크가 두 번 생기거나 빌드 결과에 파일이 빠집니다.

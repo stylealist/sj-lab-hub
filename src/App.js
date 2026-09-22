@@ -38,11 +38,25 @@ const features = [
   },
 ];
 
+// 로컬 개발 시 sj-lab-mapservice는 이 허브와 다른 포트(4000)에서 별도로 뜨기 때문에
+// 상대경로 "/map"으로는 이동할 수 없다. 운영은 nginx가 sj-lab.co.kr/map/ 을 같은 오리진의
+// 하위 경로로 서빙하므로 상대경로 그대로 둔다. sj-lab-mapservice의 getApiUrl()과 같은 패턴.
+function resolveFeaturePath(path) {
+  if (path === "/map") {
+    const hostname = window.location.hostname;
+    if (hostname === "localhost" || hostname === "127.0.0.1") {
+      return "http://localhost:4000";
+    }
+  }
+  return path;
+}
+
 function App() {
   const handleCardClick = (feature) => {
     if (feature.isAvailable) {
-      console.log(`${feature.title} 페이지로 이동: ${feature.path}`);
-      window.location.href = feature.path;
+      const target = resolveFeaturePath(feature.path);
+      console.log(`${feature.title} 페이지로 이동: ${target}`);
+      window.location.href = target;
     } else {
       alert(
         `${feature.title}은(는) ${feature.status}입니다.\n\n곧 만나보실 수 있습니다!`
