@@ -50,17 +50,8 @@ function App() {
     }
   };
 
-  const handleLogout = () => {
-    if (window.SjLabAuth) {
-      window.SjLabAuth.logout();
-    }
-  };
-
   return (
     <div style={outerStyle}>
-      <button style={logoutButtonStyle} onClick={handleLogout} type="button">
-        로그아웃
-      </button>
       <div style={containerStyle}>
         <div style={headerStyle}>
           <h1 style={titleStyle}>
@@ -101,7 +92,6 @@ function App() {
 }
 
 const outerStyle = {
-  position: "relative",
   height: "100vh",
   display: "flex",
   justifyContent: "center",
@@ -250,22 +240,6 @@ const overlayContentStyle = {
   borderRadius: "2rem",
   boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
   border: "2px solid rgba(255, 255, 255, 0.8)",
-};
-
-const logoutButtonStyle = {
-  position: "absolute",
-  top: "1.5rem",
-  right: "1.5rem",
-  padding: "0.5rem 1rem",
-  borderRadius: "999px",
-  border: "1px solid rgba(255,255,255,0.2)",
-  background: "rgba(255,255,255,0.08)",
-  color: "rgba(255,255,255,0.8)",
-  fontSize: "0.8rem",
-  fontWeight: 500,
-  letterSpacing: "0.05em",
-  cursor: "pointer",
-  zIndex: 10,
 };
 
 const overlayTextStyle = {
