@@ -33,20 +33,22 @@ const features = [
     icon: "🔌",
     description: "API Integration",
     path: "/openapi",
-    isAvailable: false,
-    status: "Coming Soon",
+    isAvailable: true,
   },
 ];
 
 // 로컬 개발 시 sj-lab-mapservice는 이 허브와 다른 포트(4000)에서 별도로 뜨기 때문에
 // 상대경로 "/map"으로는 이동할 수 없다. 운영은 nginx가 sj-lab.co.kr/map/ 을 같은 오리진의
 // 하위 경로로 서빙하므로 상대경로 그대로 둔다. sj-lab-mapservice의 getApiUrl()과 같은 패턴.
+const LOCAL_FEATURE_PORTS = {
+  "/map": "http://localhost:4000",
+  "/openapi": "http://localhost:4100",
+};
+
 function resolveFeaturePath(path) {
-  if (path === "/map") {
-    const hostname = window.location.hostname;
-    if (hostname === "localhost" || hostname === "127.0.0.1") {
-      return "http://localhost:4000";
-    }
+  const hostname = window.location.hostname;
+  if (hostname === "localhost" || hostname === "127.0.0.1") {
+    return LOCAL_FEATURE_PORTS[path] || path;
   }
   return path;
 }
