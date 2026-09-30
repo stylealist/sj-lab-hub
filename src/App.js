@@ -29,7 +29,7 @@ const features = [
   },
   {
     title: "OpenAPI",
-    gradient: "linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)",
+    gradient: "linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%)",
     icon: "🔌",
     description: "API Integration",
     path: "/openapi",
